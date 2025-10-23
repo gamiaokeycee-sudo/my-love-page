@@ -1,0 +1,30 @@
+@echo off
+rem --- Animated Notepad birthday message launcher ---
+set "HER=Her Name Here"
+set "YOU=Your Name Here"
+set "FOLDER=%~dp0"
+set "MSGFILE=%FOLDER%hb_message.txt"
+set "VBS=%FOLDER%type_vbs_generator.vbs"
+
+rem create the plain message file (used as source for typing)
+>"%MSGFILE%" (
+echo Happy Birthday, %HER%!
+echo.
+echo 🎈 I hope your day sparkles as much as you do.
+echo You make my every day better — thank you for being you.
+echo.
+echo Hugs and cake (lots of cake) ❤️
+echo.
+echo Love,
+echo %YOU%
+)
+
+if not exist "%VBS%" (
+  echo Error: "%VBS%" not found. Make sure type_vbs_generator.vbs is in the same folder.
+  pause
+  exit /b 1
+)
+
+rem call the vbs to open notepad and type the message
+cscript //nologo "%VBS%" "%MSGFILE%"
+exit /b
